@@ -18,17 +18,21 @@ Add the missing spelling dictionaries.
 
 [SUPER] + [SPACE] >> Install >> Package
 
-> Australia: hunspell-en_au 
-> Canada: hunspell-en_ca 
-> United States: hunspell-en_us 
-> Great Britain: hunspell-en_gb 
-> hyphen-en
+Search for and add [TAB]:
+- Tools:
+  - hunspell
+  - hyphen-en
+- Dictionaries:
+  - Australia: hunspell-en_au
+  - Canada: hunspell-en_ca
+  - United States: hunspell-en_us
+  - Great Britain: hunspell-en_gb 
 
 ## Install [VictorMono](https://rubjo.github.io/victor-mono/) Nerd Font
 
 [SUPER] + [SPACE] >> Install >> Style >> Font
 
-> `VictorMono Nerd Font`
+> Search for `VictorMono Nerd Font`
 
 ## [Starship](https://starship.rs/) controls your shell prompt
 
@@ -75,15 +79,18 @@ deleted    = ""
 
 [SUPER] + [SPACE] >> Install >> Terminal
 
-> `ghostty`
+Search for
+- ghostty
 
 [SUPER] + [SPACE] >> Setup >> Defaults >> Terminal 
 
-> `ghostty`
+Search for
+- ghostty
 
 [SUPER] + [SPACE] >> Remove >> Terminal
 
-> `foot`
+Search for
+- foot
 
 Create a [ghostty](https://ghostty.org/) configuration. Don't like VictorMono fonts? Run `ghostty +list-fonts` to see what you have available.
 
@@ -135,15 +142,16 @@ async-backend = epoll
 
 [SUPER] + [SPACE] >> Install >> Package
 
-> Search for `flatpak`
+Search for:
+- flatpak
 
-Add the proper `XDGDATADIRS` path updates so that flatpak installs auto populate in the application launcher.
+Add the proper `XDGDATADIRS` path updates so that [flatpak](https://flathub.org/) installs auto populate in the application launcher.
 
 ``` bash
 echo 'export XDG_DATA_DIRS=/var/lib/flatpak/exports/share:${HOME}/.local/share/flatpak/exports/share:${XDG_DATA_DIRS:-/usr/local/share/:/usr/share/}' > ${HOME}/.config/environment.d/flatpak.conf
 ```
 
-Download flatpak refrence files from the flatpak hub and install them like this: 
+Download [flatpak](https://flathub.org/) refrence files from the [flatpak](https://flathub.org/) hub and install them like this: 
 
 `flatpak install Downloads\com.provider.www.flatpakref`
 
@@ -151,7 +159,8 @@ Download flatpak refrence files from the flatpak hub and install them like this:
 
 [SUPER] + [SPACE] >> Install >> Package
 
-> `kdeconnect`
+Search for
+- kdeconnect
 
 You will need a `ufw` rule to allow TCP traffic to port range `1714:1746`. These are the standard communication ports used by [KDE Connect](https://kdeconnect.kde.org/).
 
@@ -182,15 +191,19 @@ This assumes an Intel CPU build with an Nvidia GPU. AMD CPU and Radeon GPU build
 
 Using Omarchy >> Install >> Package
 
-> Install `cmake base-devel openblas cuda`
+Search for and add [TAB]:
+- cmake
+- base-devel
+- openblas
+- cuda`
 
-Add CUDA tools to the users environment variables.
+### Add CUDA tools to the users environment variables.
 
 ``` bash
 echo -e 'export CUDA_HOME="/opt/cuda"\nexport PATH="$PATH:$CUDA_HOME/bin"\nexport LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_HOME/lib64"\n' > ${HOME}/.config/environment.d/cuda.conf
 ```
 
-git clone and build to install [llama.cpp](https://github.com/ggml-org/llama.cpp)
+### git clone and build to install [llama.cpp](https://github.com/ggml-org/llama.cpp)
 
 ``` bash
 cd ${HOME}
@@ -201,7 +214,7 @@ cmake -B `pwd` -DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS -DGGML_CUDA=ON -DGGML_
 cmake --build `pwd`
 ```
 
-git pull and build to update [llama.ccp](https://github.com/ggml-org/llama.cpp) when needed
+### git pull and build to update [llama.ccp](https://github.com/ggml-org/llama.cpp) when needed
 
 ``` bash
 cd ${HOME}/llama.cpp
@@ -216,15 +229,15 @@ cmake --build `pwd`
 
 > [!NOTE] If you receive `CMake Error at tools/...` run the following: `cd .. && rm -rf build $$ mkdir build && cd build` and try cmake again.
 
-
 Below is a bare minimum [llama.cpp](https://llama.app/) execution to get llama-serve  running with Nvidia CUDA and have Intel CPU offloading to cover gaps and overflows. It supports a UI at [http://127.0.0.1:11434/](http://127.0.0.1:11434/) and an OpenAI API at http://127.0.0.1:11434/v1. It only allows one model to be loaded at a time and does not focus on concurency optimization. It utilizes GGUF models that are saved into `${HOME}/llama.cpp/gguf/`. I recomend [Unsloth AI](https://huggingface.co/unsloth) models for this install. Use a model smaller than your total VRAM size, e.g. 8GB Video Card, use a 6GB Model (8-12B perameter at Q4 or Q5 quantization typically). Mixture of Expert (MoE) models can be any size but make sure the active experts (e.g. A4B) layers can fit in your GPU VRAM. 
-
 
 ``` bash
 ${HOME]/llama.cpp/build/bin/llama-server -c 0 -np 1 --cache-type-k q8_0 --cache-type-v q8_0 --batch-size 128 --models-dir ${HOME}/llama.cpp/gguf/ --models-max 1 --mmap --mlock --fit on --chat-template-kwargs "{\"thinking\":true, \"preserve_thinking\":true}" --reasoning on --host 127.0.0.1 --port 11434 --ui --cache-prompt --check-tensors
 ```
 
 > [!NOTE] You will see models listed when this executes. This models names are the names you need for an opencode configuration.
+
+## Create a [llama.cpp](https://llama.app/) service
 
 Create a service for the [llama.cpp](https://llama.app/) install. This service is bare minimum like the command above. It is not production ready.
 
@@ -276,25 +289,40 @@ systemctl --user restart llama-server
 systemctl --user stop llama-server
 ```
 
+## Add llama.cpp UI to the application launcher
+
+[SUPER] + [SPACE] >> Install >> Web App
+
+- Name: `llama.cpp UI`
+- URL: `http://127.0.0.1:11434/`
+- Icon: `https://raw.githubusercontent.com/ggml-org/llama.cpp/refs/heads/master/media/llama1-icon.png`
+
 ## Install [aider](https://aider.chat/) in Omarchy
 
 [SUPER] + [SPACE] >> Install >> AUR (Arch User Repository)
 
-> `aider-install`
+> Search for `aider-install`
 
 > [!NOTE] This install should partually fail due to [mise](https://mise.jdx.dev/) so run:
 > `uvx aider-install`
 
-`aider --version`
+Run `aider --version` to ensure the install was successful.
 
 ## [opencode](https://opencode.ai/) setup
 
 [SUPER] + [SPACE] >> Setup >> Agent 
 
-> opencode
-> OR Run: `omarchy default agent opencode`
+> Search for `opencode`
+> OR from the terminal run: `omarchy default agent opencode`
 
 Provided is a sample bare minimum default [opencode](https://github.com/anomalyco/opencode).json configuration file. This is by no means production ready. It is just enough to get you started with the [llama.cpp](https://github.com/anomalyco/opencode) install from above.
+
+> [!NOTE] Replace `MODEL-NAME-PRESENTED-BY-LLAMA-SERVE` with the proper name llama-server is presenting.
+> Replace `HUMAN READABLE NAME AND INFORMATION` with a name or description that has meaning to you.
+> e.g. `"Qwen3.6-35B-A3B-UD-Q8_K_XL": { "name": "Qwen 3.6 35B MoE [A 3B] Unslothed - General Reasoning & Tooling"},`
+
+> The `model` line outside of the `provider` block defines the default model for [opencode](https://github.com/anomalyco/opencode) to select every time it opens.
+> The `default_agent` line set opencode in plan mode by default instead of build mode.
 
 ``` ${HOME}/.config/opencode/opencode.json
 {
@@ -313,13 +341,11 @@ Provided is a sample bare minimum default [opencode](https://github.com/anomalyc
         "MODEL-NAME-PRESENTED-BY-LLAMA-SERVE": {
           "name": "HUMAN READABLE NAME AND INFORMATION"
         },
-        ...
-        ...
-        ...
       }
     }
   },
   "model": "llama.cpp-(local)/MODEL-NAME-PRESENTED-BY-LLAMA-SERVE",
+  "default_agent": "plan",
   "permission": {
     "bash": "ask",
     "read": "allow",
@@ -337,6 +363,12 @@ Provided is a sample bare minimum default [opencode](https://github.com/anomalyc
     "git": "ask"
   },
 }
+```
+
+Expose this [opencode](https://github.com/anomalyco/opencode).json configuration to the system so that it can use your local LLMs for built-in features like `crash-watch`.
+
+``` bash
+echo -e "export OPENCODE_CONFIG=\"${HOME}/.config/opencode/opencode.json\"\n" > ${HOME}/.config/environment.d/opencode_config.conf
 ```
 
 ## Add the ability for the current logged in user to renice applications
