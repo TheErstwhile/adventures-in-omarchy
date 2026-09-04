@@ -1,6 +1,7 @@
 # Adventures in Omarchy
 My journey of transforming a vanilla Omarchy installation into a high-performance development powerhouse—or at the very least, a survival guide for the setup process.
 
+
 ## omarchy is your friend
 
 This command `omarchy` can run a multitude of [Omarchy](https://omarchy.org/) specific functions `omarchy update` omarchy `omarchy capture --full-screen` have a look at it and remember `--help` is also your friend.
@@ -11,6 +12,7 @@ omarchy update --help
 omarchy wifi --help
 omarchy capture --help
 ```
+
 
 ## No won can speel all of times
 
@@ -28,11 +30,13 @@ Search for and add [TAB]:
   - United States: hunspell-en_us
   - Great Britain: hunspell-en_gb 
 
+
 ## Install [VictorMono](https://rubjo.github.io/victor-mono/) Nerd Font
 
 [SUPER] + [SPACE] >> Install >> Style >> Font
 
 > Search for `VictorMono Nerd Font`
+
 
 ## [Starship](https://starship.rs/) controls your shell prompt
 
@@ -74,6 +78,7 @@ staged     = ""
 renamed    = ""
 deleted    = ""
 ```
+
 
 ## Lose foot (the wayland terminal emulator) for [ghostty](https://ghostty.org/)
 
@@ -138,6 +143,7 @@ mouse-scroll-multiplier = 0.95
 async-backend = epoll
 ```
 
+
 ## Install [flatpak](https://flathub.org/)
 
 [SUPER] + [SPACE] >> Install >> Package
@@ -155,6 +161,7 @@ Download [flatpak](https://flathub.org/) refrence files from the [flatpak](https
 
 `flatpak install Downloads\com.provider.www.flatpakref`
 
+
 ## Install [KDE Connect](https://kdeconnect.kde.org/)
 
 [SUPER] + [SPACE] >> Install >> Package
@@ -171,6 +178,7 @@ sudo ufw allow from 192.168.2.12 to 192.168.1.20 port 1714:1764 proto tcp commen
 sudo ufw allow from 192.168.2.12 to 192.168.1.21 port 1714:1764 proto tcp comment "kdeconnect-tcp on WIFI (dev wlo1)"
 ```
 
+
 ## Replace SUPER + SHIFT + S (Google Maps <=> ScreenCapture)
 
 I have no need of a Google Maps web App shortcut. This key combination is better served as the default screen capture function like all other operating systems.
@@ -179,11 +187,13 @@ I have no need of a Google Maps web App shortcut. This key combination is better
 echo -e '\n-- No need for Google Maps\nhl.unbind("SUPER + SHIFT + S")\no.bind("SUPER + SHIFT + S", "Screen Capture", "omarchy-capture-screenshot")' >> ${HOME}/.config/hypr/bindings.lua
 ```
 
+
 ## Remove web apps you don't need
 
 [SUPER] + [SPACE] >> Remove >> Web App
 
 Remove all the web apps you don't need.
+
 
 ## Install [llama.cpp](https://llama.app/) GitHub:[(ggml-org/llama.cpp)](https://github.com/ggml-org/llama.cpp)
 
@@ -237,6 +247,7 @@ ${HOME]/llama.cpp/build/bin/llama-server -c 0 -np 1 --cache-type-k q8_0 --cache-
 
 > [!NOTE] You will see models listed when this executes. This models names are the names you need for an opencode configuration.
 
+
 ## Create a [llama.cpp](https://llama.app/) service
 
 Create a service for the [llama.cpp](https://llama.app/) install. This service is bare minimum like the command above. It is not production ready.
@@ -289,6 +300,7 @@ systemctl --user restart llama-server
 systemctl --user stop llama-server
 ```
 
+
 ## Add llama.cpp UI to the application launcher
 
 [SUPER] + [SPACE] >> Install >> Web App
@@ -296,6 +308,7 @@ systemctl --user stop llama-server
 - Name: `llama.cpp UI`
 - URL: `http://127.0.0.1:11434/`
 - Icon: `https://raw.githubusercontent.com/ggml-org/llama.cpp/refs/heads/master/media/llama1-icon.png`
+
 
 ## Install [aider](https://aider.chat/) in Omarchy
 
@@ -307,6 +320,7 @@ systemctl --user stop llama-server
 > `uvx aider-install`
 
 Run `aider --version` to ensure the install was successful.
+
 
 ## [opencode](https://opencode.ai/) setup
 
@@ -371,6 +385,7 @@ Expose this [opencode](https://github.com/anomalyco/opencode).json configuration
 echo -e "export OPENCODE_CONFIG=\"${HOME}/.config/opencode/opencode.json\"\n" > ${HOME}/.config/environment.d/opencode_config.conf
 ```
 
+
 ## Add the ability for the current logged in user to renice applications
 
 > [!NOTE] Only if needed!
@@ -379,6 +394,7 @@ echo -e "export OPENCODE_CONFIG=\"${HOME}/.config/opencode/opencode.json\"\n" > 
 sudo mkdir -p /etc/security/limits.d/
 echo -e "$USER\tsoft\tnice\t-10\n" | sudo tee /etc/security/limits.d/99-renice.conf
 ```
+
 
 ## What is `n`
 
