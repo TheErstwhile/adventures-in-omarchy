@@ -235,9 +235,11 @@ cmake -B `pwd` -DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS -DGGML_CUDA=ON -DGGML_
 cmake --build `pwd`
 ```
  
-> [!NOTE] If you receive `Please commit your changes or stash them before you merge.` run the following: `git checkout -- [FILE NAME OF CONFLICTING FILE]` and try git again.
+> [!NOTE]
+> If you receive `Please commit your changes or stash them before you merge.` run the following: `git checkout -- [FILE NAME OF CONFLICTING FILE]` and try git again.
 
-> [!NOTE] If you receive `CMake Error at tools/...` run the following: `cd .. && rm -rf build $$ mkdir build && cd build` and try cmake again.
+> [!NOTE]
+> If you receive `CMake Error at tools/...` run the following: `cd .. && rm -rf build $$ mkdir build && cd build` and try cmake again.
 
 Below is a bare minimum [llama.cpp](https://llama.app/) execution to get llama-serve  running with Nvidia CUDA and have Intel CPU offloading to cover gaps and overflows. It supports a UI at [http://127.0.0.1:11434/](http://127.0.0.1:11434/) and an OpenAI API at http://127.0.0.1:11434/v1. It only allows one model to be loaded at a time and does not focus on concurency optimization. It utilizes GGUF models that are saved into `${HOME}/llama.cpp/gguf/`. I recomend [Unsloth AI](https://huggingface.co/unsloth) models for this install. Use a model smaller than your total VRAM size, e.g. 8GB Video Card, use a 6GB Model (8-12B perameter at Q4 or Q5 quantization typically). Mixture of Expert (MoE) models can be any size but make sure the active experts (e.g. A4B) layers can fit in your GPU VRAM. 
 
@@ -245,7 +247,8 @@ Below is a bare minimum [llama.cpp](https://llama.app/) execution to get llama-s
 ${HOME]/llama.cpp/build/bin/llama-server -c 0 -np 1 --cache-type-k q8_0 --cache-type-v q8_0 --batch-size 128 --models-dir ${HOME}/llama.cpp/gguf/ --models-max 1 --mmap --mlock --fit on --chat-template-kwargs "{\"thinking\":true, \"preserve_thinking\":true}" --reasoning on --host 127.0.0.1 --port 11434 --ui --cache-prompt --check-tensors
 ```
 
-> [!NOTE] You will see models listed when this executes. This models names are the names you need for an opencode configuration.
+> [!NOTE]
+> You will see models listed when this executes. This models names are the names you need for an opencode configuration.
 
 
 ## Create a [llama.cpp](https://llama.app/) service
@@ -316,7 +319,8 @@ systemctl --user stop llama-server
 
 > Search for `aider-install`
 
-> [!NOTE] This install should partually fail due to [mise](https://mise.jdx.dev/) so run:
+> [!NOTE]
+> This install should partually fail due to [mise](https://mise.jdx.dev/) so run:
 > `uvx aider-install`
 
 Run `aider --version` to ensure the install was successful.
@@ -331,7 +335,8 @@ Run `aider --version` to ensure the install was successful.
 
 Provided is a sample bare minimum default [opencode](https://github.com/anomalyco/opencode).json configuration file. This is by no means production ready. It is just enough to get you started with the [llama.cpp](https://github.com/anomalyco/opencode) install from above.
 
-> [!NOTE] Replace `MODEL-NAME-PRESENTED-BY-LLAMA-SERVE` with the proper name llama-server is presenting.
+> [!NOTE]
+> Replace `MODEL-NAME-PRESENTED-BY-LLAMA-SERVE` with the proper name llama-server is presenting.
 > Replace `HUMAN READABLE NAME AND INFORMATION` with a name or description that has meaning to you.
 > e.g. `"Qwen3.6-35B-A3B-UD-Q8_K_XL": { "name": "Qwen 3.6 35B MoE [A 3B] Unslothed - General Reasoning & Tooling"},`
 
@@ -388,7 +393,8 @@ echo -e "export OPENCODE_CONFIG=\"${HOME}/.config/opencode/opencode.json\"\n" > 
 
 ## Add the ability for the current logged in user to renice applications
 
-> [!NOTE] Only if needed!
+> [!NOTE]
+> Only if needed!
 
 ``` bash
 sudo mkdir -p /etc/security/limits.d/
