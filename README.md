@@ -418,7 +418,7 @@ Create the alias `alias ff-neo='n $(ff -i -e)'` to make finding an opening files
 
 ## List all currently open window identifiers
 
-When using Hyprland there are times where you will need to configure things for specific Window Identifiers. To list the identifiers for all open windows run `hyprctl clients | grep -E "class:|title:"`.
+When using Hyprland there are times where you will need to configure things for specific Window Identifiers. To list the identifiers for all open windows run `hyprctl clients | grep -E "Window |class:|title:|tags:|pid:|hidden:|visible:"`.
 
 
 ## Increase btop TUI window size (uses window identifies above)
