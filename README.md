@@ -409,3 +409,13 @@ echo -e "$USER\tsoft\tnice\t-10\n" | sudo tee /etc/security/limits.d/99-renice.c
 ## What is `n`
 
 The command `n` is a built in function of the shell. Use `type n` to see the function. Omarchy base includes [neovim](https://neovim.io/) as it's editor and applied the [lazyvim](https://www.lazyvim.org/) customization templates to it. The base [neovim](https://neovim.io/) command is `nvim`.
+
+
+## Fuzzy Finder for NeoViM
+
+Create the alias `alias ff-neo='n $(ff -i -e)'` to make finding an opening files easier. It opens fuzzy finder in exact words match, case insensitive mode. Type a file (.e.g btop.conf). Select the correct file from the list (Up and Down Arrows and Enter). It will automatically open that file in NeoVIM (nvim). See above ***What is \`n\`***
+
+
+## List all currently open window identifiers
+
+When using Hyprland there are times where you will need to configure things for specific Window Identifiers. To list the identifiers for all open windows run `hyprctl clients | grep -E "class:|title:"`.
