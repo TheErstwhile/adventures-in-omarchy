@@ -419,3 +419,11 @@ Create the alias `alias ff-neo='n $(ff -i -e)'` to make finding an opening files
 ## List all currently open window identifiers
 
 When using Hyprland there are times where you will need to configure things for specific Window Identifiers. To list the identifiers for all open windows run `hyprctl clients | grep -E "class:|title:"`.
+
+
+## Increase btop TUI window size (uses window identifies above)
+It is just too small, especially if you increase the font size or use ghostty instead of foot. Open the user specific hyprland config: `n ${HOME}/.config/hypr/hyprland.lua`. In this file look for the section `-- Add any other personal Hyprland configuration below.` and add a line below that, on that line add the following `o.window("org.omarchy.btop", { name = "btop-size", tag = "-floating-window", float = true, center = true, size = { 1240, 950 } })`. Write the file: [ESC] [:] write [Enter]. QuitL [:] quit [Enter]. Hyprland uses lua scripts for the configuration, it should reload automatically... just to be sure run `hyprctl reload`. Press [SUPER] + [CTRL] + [E], look at that nice big btop. This will fit comfortably on any 1080p sized screen or larger. This works by removing the default `floating-window` tag that is assigned in the anonymous / default space. It then creates a floating centered window at the specified size. I names this setting so that it has override priority versus anonymous tags. If you want to use this for other apps change both the window identity and the rule name fields.
+
+
+## Send an App to a specific workspace every time it is opened  (uses window identifies above)
+Open the user specific hyprland config: `n ${HOME}/.config/hypr/hyprland.lua`. In this file look for the section `-- Add any other personal Hyprland configuration below.` and add a line below that, on that line add the following `o.window("cliamp", { workspace = "2" })`. CLIAMP now always opens workspace 2.
