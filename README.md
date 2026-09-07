@@ -15,8 +15,8 @@ omarchy capture --help
 
 ### First Things First, Battery Settings
 
-Set battery state to *power-saver* with `omarchy powerprofiles set battery power-saver`.
-Set ac power state to *performance* with `omarchy powerprofiles set ac performance`
+- Set battery state to *power-saver* with `omarchy powerprofiles set battery power-saver`.
+- Set ac power state to *performance* with `omarchy powerprofiles set ac performance`
 
 ## No won can speel all of times
 
