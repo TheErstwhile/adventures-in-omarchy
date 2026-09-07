@@ -426,4 +426,6 @@ It is just too small, especially if you increase the font size or use ghostty in
 
 
 ## Send an App to a specific workspace every time it is opened  (uses window identifies above)
-Open the user specific hyprland config: `n ${HOME}/.config/hypr/hyprland.lua`. In this file look for the section `-- Add any other personal Hyprland configuration below.` and add a line below that, on that line add the following `o.window("cliamp", { workspace = "2" })`. CLIAMP now always opens workspace 2.
+> [!NOTE]
+> I have not found a way to make this work for terminal applications.
+Open the user specific hyprland config: `n ${HOME}/.config/hypr/hyprland.lua`. In this file look for the section `-- Add any other personal Hyprland configuration below.` and add a line below that, on that line add the following `o.window("firefox", { workspace = "2" })`. Firefox now always opens workspace 2.
