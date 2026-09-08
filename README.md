@@ -418,6 +418,10 @@ echo -e "$USER\tsoft\tnice\t-10\n" | sudo tee /etc/security/limits.d/99-renice.c
 ```
 
 
+## Game Developers needing to poke at game memory
+Some of us like to work on game engines. You need to poke around memory. The `scanmem` tool is part of Arch Extras Repository (no relation to AUR). You won't see it in the standard Install Packages TUI. Run this command to install it from Extras: `sudo pacman -S gameconqueror scanmem`
+
+
 ## What is `n`
 
 The command `n` is a built in function of the shell. Use `type n` to see the function. Omarchy base includes [neovim](https://neovim.io/) as it's editor and applied the [lazyvim](https://www.lazyvim.org/) customization templates to it. The base [neovim](https://neovim.io/) command is `nvim`.
