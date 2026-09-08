@@ -13,10 +13,22 @@ omarchy wifi --help
 omarchy capture --help
 ```
 
+
 ### First Things First, Battery Settings
 
 - Set battery state to *power-saver* with `omarchy powerprofiles set battery power-saver`.
 - Set ac power state to *performance* with `omarchy powerprofiles set ac performance`
+
+
+## Arch and the dreaded ARU (Arch User Repository)
+
+> [!NOTE]
+> Omarchy makes it easy to access the Arch User Repository. That doesn't mean you should access it. It assumes you know what you are doing or you would not be running Omarchy in the first place. Do not freely install packages from AUR. Always use packages from:
+> [SUPER] + [SPACE] >> Install >> Package
+> Use AUR as a last resort only.
+
+This repository is for cutting edge one off software packages. This repository is the Wild West, you don't install from this repository unless you need to. There have been multiple cases of malware being published to this repository. Use at your own risk. To see all the packages installed from AUR run the command `pacman -Qm`. Always make sure the build URL, build script, and dependencies are not pulling in unwanted software. To get basic package information run `yay -Qi1 [PACKAGE NAME]`
+
 
 ## No won can speel all of times
 
