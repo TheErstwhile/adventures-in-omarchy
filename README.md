@@ -57,6 +57,7 @@ Search for and add [TAB]:
 ## [Starship](https://starship.rs/) controls your shell prompt
 
 Use `starship` to configure your prompt. The configuration files is located here: `${HOME}/.config/starship.toml`. Here is a sample I always start with.
+
 > [${HOME}/.config/starship.toml](https://github.com/TheErstwhile/adventures-in-omarchy/blob/main/.config/starship.toml)
 
 
@@ -79,49 +80,7 @@ Search for
 
 Create a [ghostty](https://ghostty.org/) configuration. Don't like VictorMono fonts? Run `ghostty +list-fonts` to see what you have available.
 
-``` ${HOME}/.config/ghostty/config 
-# Dynamic theme colors
-config-file = ?"~/.local/state/omarchy/current/theme/ghostty.conf"
-
-# Font
-font-family = "VictorMono Nerd Font Mono"
-font-style = Regular
-font-size = 14
-
-# Window
-window-theme = ghostty
-window-padding-x = 14
-window-padding-y = 14
-confirm-close-surface=true
-resize-overlay = never
-gtk-toolbar-style = flat
-
-# Cursor styling
-cursor-style = "block"
-cursor-style-blink = true
-
-# Cursor styling + SSH session terminfo
-# (all shell integration options must be passed together)
-shell-integration-features = no-cursor,ssh-env
-
-# Keyboard bindings
-keybind = shift+insert=paste_from_clipboard
-keybind = control+insert=copy_to_clipboard
-# Send Shift+Enter as CSI-u so TUIs can distinguish it from Enter.
-keybind = shift+enter=csi:13;2u
-# Legacy encoding sends Alt+Shift+Enter the same as Alt+Enter; send CSI-u so tmux can match M-S-Enter.
-keybind = alt+shift+enter=csi:13;4u
-keybind = super+control+shift+alt+arrow_down=resize_split:down,100
-keybind = super+control+shift+alt+arrow_up=resize_split:up,100
-keybind = super+control+shift+alt+arrow_left=resize_split:left,100
-keybind = super+control+shift+alt+arrow_right=resize_split:right,100
-
-# Slowdown mouse scrolling
-mouse-scroll-multiplier = 0.95
-
-# Fix general slowness on hyprland (https://github.com/ghostty-org/ghostty/discussions/3224)
-async-backend = epoll
-```
+> [${HOME}/.config/ghostty/config](https://github.com/TheErstwhile/adventures-in-omarchy/blob/main/.config/ghostty/config)
 
 
 ## Install [flatpak](https://flathub.org/)
