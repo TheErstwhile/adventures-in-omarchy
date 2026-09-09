@@ -1,1 +1,214 @@
+# ~/.config/starship.toml
+# Erstwhile : https://github.com/TheErstwhile/adventures-in-omarchy/
+# ####
 
+add_newline = true
+command_timeout = 200
+
+
+# ─────────────────────────────────────────────────────────────
+# Prompt
+# ─────────────────────────────────────────────────────────────
+format = """
+[╭─«](bold)  [${custom.docker_project}](none)[$directory](none)[$git_branch$git_status](none)[$cmake](none)[$c](none)[$cpp](none)[$python](none)[$nodejs](none)[$dotnet](none)[$lua](none) $fill $cmd_duration$jobs$battery
+[╰─▶](bold)  [$character]($style) """
+
+
+# ─────────────────────────────────────────────────────────────
+# Command result
+# ─────────────────────────────────────────────────────────────
+[character]
+error_symbol = "[⚠](bold red)"
+success_symbol = "[✓](bold green)"
+
+
+# ─────────────────────────────────────────────────────────────
+# Detect Docker Project
+# ─────────────────────────────────────────────────────────────
+[custom.docker_project]
+#command = "printf ' '"
+# when = "test -f compose.yaml || test -f docker-compose.yml || test -f Dockerfile"
+# format = "[$output]($style)  "
+detect_files = ["compose.yaml", "docker-compose.yml", "Dockerfile", "Containerfile"]
+detect_folders = [".devcontainer"]
+# detect_extensions = ["yaml"]
+format = "[]($style)  "
+style = "blue"
+
+
+# ─────────────────────────────────────────────────────────────
+# Current Working Directory
+# ─────────────────────────────────────────────────────────────
+[directory]
+truncation_length = 4
+truncation_symbol = "…/"
+read_only = "  "
+repo_root_style = "italic"
+repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+
+
+# ─────────────────────────────────────────────────────────────
+# Git branch information
+# ─────────────────────────────────────────────────────────────
+[git_branch]
+format = "[ $branch]($style) "
+style = "italic cyan"
+
+
+# ─────────────────────────────────────────────────────────────
+# Git status information
+# ─────────────────────────────────────────────────────────────
+[git_status]
+format = "[$all_status]($style) "
+style = "cyan"
+
+ahead      = "⇡${count} "
+diverged   = "⇕⇡${ahead_count}⇣${behind_count} "
+behind     = "⇣${count} "
+
+conflicted = " "
+up_to_date = "✓ "
+untracked  = "? "
+modified   = "󰦮 "
+stashed    = "≡ "
+staged     = "󰏗 "
+renamed    = "⇄ "
+deleted    = "󰆴 "
+
+
+# ─────────────────────────────────────────────────────────────
+# CMake environment
+# ─────────────────────────────────────────────────────────────
+[cmake]
+format = "[CMake $version]($style) "
+symbol = ""
+detect_extensions = ["cmake"]
+style = "dimmed"
+version_format = "${major}.${minor}"
+
+
+# ─────────────────────────────────────────────────────────────
+# C environment
+# ─────────────────────────────────────────────────────────────
+[c]
+format = "[$symbol \\($name $version\\)]($style) "
+symbol = ""
+style = "dimmed"
+version_format = "${major}.${minor}"
+
+
+# ─────────────────────────────────────────────────────────────
+# C++ environment
+# ─────────────────────────────────────────────────────────────
+[cpp]
+format = "[$symbol \\($name $version\\)]($style) "
+symbol = "󰙲"
+style = "dimmed"
+version_format = "${major}.${minor}"
+disabled = false
+
+
+# ─────────────────────────────────────────────────────────────
+# Python environment
+# ─────────────────────────────────────────────────────────────
+[python]
+format = "[$symbol $version $virtualenv ]($style) "
+symbol = ""
+style = "dimmed"
+version_format = "${major}.${minor}"
+
+
+# ─────────────────────────────────────────────────────────────
+# Node.js environment
+# ─────────────────────────────────────────────────────────────
+[nodejs]
+format = "[Node$symbol $version]($style) "
+symbol = ""
+style = "dimmed"
+version_format = "${major}"
+
+
+# ─────────────────────────────────────────────────────────────
+# .NET environment
+# ─────────────────────────────────────────────────────────────
+[dotnet]
+format = "[$symbol $version]($style) "
+symbol = ""
+style = "dimmed"
+version_format = "${major}"
+
+
+# ─────────────────────────────────────────────────────────────
+# Python environment
+# ─────────────────────────────────────────────────────────────
+[lua]
+format = "[$symbol $version ]($style) "
+symbol = ""
+style = "dimmed"
+version_format = "${major}.${minor}"
+
+
+# ─────────────────────────────────────────────────────────────
+# Command duration
+# ─────────────────────────────────────────────────────────────
+[cmd_duration]
+# Minimum Time in Milliseconds
+# 1_000 = 1 second
+min_time = 1_000
+format = "[◷ $duration]($style) "
+style = "dimmed"
+
+
+# ─────────────────────────────────────────────────────────────
+# Shell jobs
+# Jobs is not a process monitor. 
+# It is a shell-state reminder evaluated at prompt time.
+# The count may remain unchanged until the next prompt.
+# ─────────────────────────────────────────────────────────────
+[jobs]
+format = "[ $number]($style) "
+style = "dimmed"
+
+
+# ─────────────────────────────────────────────────────────────
+# Battery
+# ─────────────────────────────────────────────────────────────
+[battery]
+format = "[$symbol$percentage]($style)"
+
+full_symbol = " "
+charging_symbol = "⚡ "
+discharging_symbol = " "
+unknown_symbol = " "
+
+
+# 0–25%: critical only when discharging
+[[battery.display]]
+threshold = 25
+charging_symbol = "⚡ "
+discharging_symbol = "[⚠  ](bold inverted red)"
+style = "bold"
+
+
+# 26–50%: information, but subdued
+[[battery.display]]
+threshold = 50
+charging_symbol = "⚡ "
+discharging_symbol = " "
+style = "dimmed"
+
+
+# 51–75%: information, but subdued
+[[battery.display]]
+threshold = 75
+charging_symbol = "⚡ "
+discharging_symbol = " "
+style = "dimmed"
+
+
+# 76–100%: healthy, unobtrusive
+[[battery.display]]
+threshold = 100
+charging_symbol = "⚡ "
+discharging_symbol = " "
+style = "dimmed"
