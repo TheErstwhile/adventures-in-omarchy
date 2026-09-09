@@ -56,8 +56,8 @@ Search for and add [TAB]:
 
 ## [Starship](https://starship.rs/) controls your shell prompt
 
-Use `starship` to configure your prompt. Look at `${HOME}/.config/starship.toml`. 
-[${HOME}/.config/starship.toml](https://github.com/TheErstwhile/adventures-in-omarchy/blob/main/.config/starship.toml)
+Use `starship` to configure your prompt. The configuration files is located here: `${HOME}/.config/starship.toml`. Here is a sample I always start with.
+> [${HOME}/.config/starship.toml](https://github.com/TheErstwhile/adventures-in-omarchy/blob/main/.config/starship.toml)
 
 
 ## Lose foot (the wayland terminal emulator) for [ghostty](https://ghostty.org/)
