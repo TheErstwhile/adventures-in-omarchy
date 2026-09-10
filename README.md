@@ -1,240 +1,645 @@
-# Adventures in Omarchy
-My journey of transforming a vanilla Omarchy installation into a high-performance development powerhouse—or at the very least, a survival guide for the setup process.
+# 🏔️ Adventures in Omarchy
 
+My journey of transforming a vanilla [Omarchy](<https://omarchy.org/>) installation into a high-performance development powerhouse.
 
-## omarchy is your friend
+Or, at the very least, a survival guide for the setup process.
 
-This command `omarchy` can run a multitude of [Omarchy](https://omarchy.org/) specific functions `omarchy update` omarchy `omarchy capture --full-screen` have a look at it and remember `--help` is also your friend.
+Everything in this document has been **installed, configured, and tested on my system for multiple weeks**. These are not theoretical configurations or instructions assembled from random corners of the internet. This is what I actually use.
 
-``` bash
+This guide is intentionally **opinionated and hardware-specific**. My primary system uses an **Intel CPU and NVIDIA GPU**. I don't have AMD hardware available for testing, so I'm not going to pretend I do.
+
+If something here works for you: fantastic.
+
+If something doesn't: congratulations, you've discovered Linux.
+
+---
+
+# 🧭 First Things First
+
+## `omarchy` Is Your Friend
+
+The `omarchy` command provides a multitude of [Omarchy](<https://omarchy.org/>) specific functions.
+
+Before wandering off into configuration files, it's worth seeing what it can already do:
+
+```
 omarchy --help
 omarchy update --help
 omarchy wifi --help
 omarchy capture --help
 ```
 
+And remember:
 
-### First Things First, Battery Settings
+> `--help` is also your friend.
 
-- Set battery state to *power-saver* with `omarchy powerprofiles set battery power-saver`.
-- Set ac power state to *performance* with `omarchy powerprofiles set ac performance`
+It generally knows more about the command than I do.
 
+---
 
-## Arch and the dreaded ARU (Arch User Repository)
+## 🔋 Battery Settings
 
-> [!NOTE]
-> Omarchy makes it easy to access the Arch User Repository. That doesn't mean you should access it. It assumes you know what you are doing or you would not be running Omarchy in the first place. Do not freely install packages from AUR. Always use packages from:
-> [SUPER] + [SPACE] >> Install >> Package
-> Use AUR as a last resort only.
+I prefer the following power profile configuration:
 
-This repository is for cutting edge one off software packages. This repository is the Wild West, you don't install from this repository unless you need to. There have been multiple cases of malware being published to this repository. Use at your own risk. To see all the packages installed from AUR run the command `pacman -Qm`. Always make sure the build URL, build script, and dependencies are not pulling in unwanted software. To get basic package information run `yay -Qi1 [PACKAGE NAME]`
+- Battery → `power-saver`
+- AC power → `performance`
 
+```
+omarchy powerprofiles set battery power-saver
+omarchy powerprofiles set ac performance
+```
 
-## No won can speel all of times
+The goal is simple: save power when running on battery and stop pretending the CPU isn't plugged into a wall when it is.
 
-Add the missing spelling dictionaries.
+---
 
-[SUPER] + [SPACE] >> Install >> Package
+# 🏹 Arch and the Dreaded AUR
 
-Search for and add [TAB]:
-- Tools:
-  - hunspell
-  - hyphen-en
-- Dictionaries:
-  - Australia: hunspell-en_au
-  - Canada: hunspell-en_ca
-  - United States: hunspell-en_us
-  - Great Britain: hunspell-en_gb 
+Ah yes, the **Arch User Repository**.
 
+> \[!WARNING\]\
+>  Omarchy makes it very easy to access the AUR.
+>
+>  That does **not** mean you should install everything from it.
+>
+>  The AUR assumes you know what you're doing. If you're running Omarchy, you presumably have at least some idea what you're doing. Please don't ruin that reputation.
 
-## Install [VictorMono](https://rubjo.github.io/victor-mono/) Nerd Font
+Whenever possible, use Omarchy's package installer:
 
-[SUPER] + [SPACE] >> Install >> Style >> Font
+```
+[SUPER] + [SPACE]
+    ↓
+Install
+    ↓
+Package
+```
 
-> Search for `VictorMono Nerd Font`
+Use the AUR as a **last resort**, not as your default package manager.
 
+The AUR is a collection of user-contributed packages. It is useful for software that isn't available through the official repositories, but packages should still be treated with appropriate caution.
 
-## [Starship](https://starship.rs/) controls your shell prompt
+To see packages installed from outside the official repositories:
 
-Use `starship` to configure your prompt. The configuration files is located here: `${HOME}/.config/starship.toml`. Here is a sample I always start with.
+```
+pacman -Qm
+```
+
+Before installing an AUR package, inspect:
+
+- The build URL
+- The build script / PKGBUILD
+- Dependencies
+- Installation scripts
+- Where downloaded software originates
+
+For basic package information:
+
+```
+yay -Qi [PACKAGE_NAME]
+```
+
+The AUR is the Wild West.
+
+Sometimes you need to go there.
+
+You don't need to build a vacation home there.
+
+---
+
+# ✍️ No Won Can Speel All of Times
+
+Apparently, I cannot spell all of the times.
+
+Fortunately, the computer can help.
+
+Add the missing spelling dictionaries through Omarchy:
+
+```
+[SUPER] + [SPACE]
+    ↓
+Install
+    ↓
+Package
+```
+
+Search for and install:
+
+### Tools
+
+- `hunspell`
+- `hyphen-en`
+
+### Dictionaries
+
+- Australia → `hunspell-en_au`
+- Canada → `hunspell-en_ca`
+- United States → `hunspell-en_us`
+- Great Britain → `hunspell-en_gb`
+
+Because apparently knowing how to spell _colour_ and _color_ isn't enough. We must support both civilizations.
+
+---
+
+# 🔤 Fonts - VictorMono Nerd Font
+
+Install [VictorMono](<https://rubjo.github.io/victor-mono/>) Nerd Font:
+
+```
+[SUPER] + [SPACE]
+    ↓
+Install
+    ↓
+Style
+    ↓
+Font
+```
+
+Search for:
+
+```
+VictorMono Nerd Font
+```
+
+Because developers apparently spend an unreasonable amount of time deciding what their terminal should look like.
+
+I am no exception.
+
+---
+
+# 🚀 Shell - Brought to You by Starship
+
+[Starship](<https://starship.rs/>) controls the shell prompt.
+
+The configuration file lives here:
+
+```
+${HOME}/.config/starship.toml
+```
+
+This is the sample configuration I generally start with:
 
 > [${HOME}/.config/starship.toml](https://github.com/TheErstwhile/adventures-in-omarchy/blob/main/.config/starship.toml)
 
+A good shell prompt won't make you a better developer.
 
-## Lose foot (the wayland terminal emulator) for [ghostty](https://ghostty.org/)
+It will, however, make you _feel_ like one.
 
-[SUPER] + [SPACE] >> Install >> Terminal
+---
 
-Search for
-- ghostty
+# 👻 Terminal - Lose Foot. Gain Ghostty.
 
-[SUPER] + [SPACE] >> Setup >> Defaults >> Terminal 
+[Foot](<https://codeberg.org/dnkl/foot/>) is perfectly respectable.
 
-Search for
-- ghostty
+I just don't want it.
 
-[SUPER] + [SPACE] >> Remove >> Terminal
+We're replacing it with [Ghostty](<https://ghostty.org/>).
 
-Search for
-- foot
+### Install Ghostty
 
-Create a [ghostty](https://ghostty.org/) configuration. Don't like VictorMono fonts? Run `ghostty +list-fonts` to see what you have available.
+```
+[SUPER] + [SPACE]
+    ↓
+Install
+    ↓
+Terminal
+```
+
+Search for:
+
+```
+ghostty
+```
+
+### Make Ghostty the Default Terminal
+
+```
+[SUPER] + [SPACE]
+    ↓
+Setup
+    ↓
+Defaults
+    ↓
+Terminal
+```
+
+ Search for:
+
+```
+ghostty
+```
+
+### Remove Foot
+
+```
+[SUPER] + [SPACE]
+    ↓
+Remove
+    ↓
+Terminal
+```
+
+Search for:
+
+```
+foot
+```
+
+ ### Configure Ghostty
+
+ Create:
+
+```
+${HOME}/.config/ghostty/config
+```
+
+My configuration is available here:
 
 > [${HOME}/.config/ghostty/config](https://github.com/TheErstwhile/adventures-in-omarchy/blob/main/.config/ghostty/config)
 
+Don't like VictorMono?
 
-## Install [flatpak](https://flathub.org/)
+See what Ghostty has available:
 
-[SUPER] + [SPACE] >> Install >> Package
+```
+ghostty +list-fonts
+```
+
+Pick something else.
+
+This is Linux.
+
+We have choices.
+
+---
+
+# 🧰 Desktop Applications
+
+## Flatpak
+
+Install [Flatpak](<https://flathub.org/>):
+
+```
+[SUPER] + [SPACE]
+    ↓
+Install
+    ↓
+Package
+```
 
 Search for:
-- flatpak
 
-Add the proper `XDGDATADIRS` path updates so that [flatpak](https://flathub.org/) installs auto populate in the application launcher.
+```
+flatpak
+```
 
-``` bash
+### Make Flatpak Applications Show Up in the Launcher
+
+Add the appropriate `XDG_DATA_DIRS` paths so Flatpak applications automatically populate the application launcher:
+
+```
 echo 'export XDG_DATA_DIRS=/var/lib/flatpak/exports/share:${HOME}/.local/share/flatpak/exports/share:${XDG_DATA_DIRS:-/usr/local/share/:/usr/share/}' > ${HOME}/.config/environment.d/flatpak.conf
 ```
 
-Download [flatpak](https://flathub.org/) refrence files from the [flatpak](https://flathub.org/) hub and install them like this: 
+### Install `.flatpakref` Files
 
-`flatpak install Downloads\com.provider.www.flatpakref`
+Download a `.flatpakref` file from [Flathub](<https://flathub.org/>) and install it with:
 
+```
+flatpak install ~/Downloads/com.provider.www.flatpakref
+```
 
-## Install [KDE Connect](https://kdeconnect.kde.org/)
+---
 
-[SUPER] + [SPACE] >> Install >> Package
+## KDE Connect
 
-Search for
-- kdeconnect
+There is nothing wrong the buit in [LocalSend](https://localsend.org/), just many of us are already using KDE Connect and this makes the migration to a new tool easier.
 
-You will need a `ufw` rule to allow TCP traffic to port range `1714:1746`. These are the standard communication ports used by [KDE Connect](https://kdeconnect.kde.org/).
+Install [KDE Connect](<https://kdeconnect.kde.org/>):
 
-Example firewall rules needed for kdeconnect to work. `from` is the IP of your other device running kdeconnect. `to` is the IP of this device running kdeconnect. This example uses a random private network with a wired Ethernet (en) controller on PCI bus location 3 (p3) slot 0 (s0) making `enp3s0` and a wireless network interface (wl) onboard device index 1 (o1) making `wlo1`. It also assumes the Ethernet and WIFI NICs have seperate static IPs.
+```
+[SUPER] + [SPACE]
+    ↓
+Install
+    ↓
+Package
+```
 
-``` bash
+Search for:
+
+```
+kdeconnect
+```
+
+### Firewall Rules
+
+[KDE Connect](<https://kdeconnect.kde.org/>) needs firewall access to its communication ports.
+
+As an example setup, you can allow TCP traffic on ports `1714:1764`.
+
+Example:
+
+```
 sudo ufw allow from 192.168.2.12 to 192.168.1.20 port 1714:1764 proto tcp comment "kdeconnect-tcp on LAN (dev enp3s0)"
 sudo ufw allow from 192.168.2.12 to 192.168.1.21 port 1714:1764 proto tcp comment "kdeconnect-tcp on WIFI (dev wlo1)"
 ```
 
+In this example:
 
-## Replace SUPER + SHIFT + S (Google Maps <=> ScreenCapture)
+- `192.168.2.12` is the other device running KDE Connect.
+- `192.168.1.20` is this machine over Ethernet.
+- `192.168.1.21` is this machine over Wi-Fi.
+- `enp3s0` is the Ethernet interface.
+- `wlo1` is the Wi-Fi interface.
 
-I have no need of a Google Maps web App shortcut. This key combination is better served as the default screen capture function like all other operating systems.
+Your IP addresses and interface names will almost certainly be different.
 
-``` bash
-echo -e '\n-- No need for Google Maps\nhl.unbind("SUPER + SHIFT + S")\no.bind("SUPER + SHIFT + S", "Screen Capture", "omarchy-capture-screenshot")' >> ${HOME}/.config/hypr/bindings.lua
+Linux enjoys naming network interfaces as if they're serial numbers for experimental aircraft.
+
+To find the network interfaces and IP addresses assigned to your own machine, run:
+
+```
+ip address
 ```
 
+Use the addresses and interface names reported by your own system when adapting the firewall rules.
 
-## Remove web apps you don't need
+---
 
-[SUPER] + [SPACE] >> Remove >> Web App
+## Remove Web Apps You Don't Need
 
-Remove all the web apps you don't need.
+You know those web apps you installed because you thought:
 
+> "Maybe I'll use this."
 
-## Install [llama.cpp](https://llama.app/) GitHub:[(ggml-org/llama.cpp)](https://github.com/ggml-org/llama.cpp)
+You won't.
 
-This assumes an Intel CPU build with an Nvidia GPU. AMD CPU and Radeon GPU builds will need to use ROCm instead of OpenBLAS and CUDA.
+Omarchy includes them by deafult!
 
-Using Omarchy >> Install >> Package
+You still won't use them.
 
-Search for and add [TAB]:
-- cmake
-- base-devel
-- openblas
-- cuda`
+Remove them:
 
-### Add CUDA tools to the users environment variables.
+```
+[SUPER] + [SPACE]
+    ↓
+Remove
+    ↓
+Web App
+```
 
-``` bash
+Delete the ones you don't need.
+
+Your application launcher will be cleaner.
+
+Your conscience will be lighter.
+
+---
+
+# 🤖 Local AI
+
+## llama.cpp
+
+This section documents my [llama.cpp](<https://llama.app/>) setup.
+
+GitHub:
+
+[ggml-org/llama.cpp](<https://github.com/ggml-org/llama.cpp>)
+
+### Hardware
+
+This configuration assumes:
+
+- Intel CPU
+- NVIDIA GPU
+- CUDA
+- OpenBLAS
+
+AMD CPU and Radeon GPU configurations will require different build options, such as ROCm.
+
+I don't have AMD hardware to test those configurations, so they're outside the scope of this document.
+
+This is the configuration I know works.
+
+### Install Dependencies
+
+Using Omarchy:
+
+```
+[SUPER] + [SPACE]
+    ↓
+Install
+    ↓
+Package
+```
+
+Search for and install:
+
+- `cmake`
+- `base-devel`
+- `openblas`
+- `cuda`
+
+### Add CUDA Tools to the Environment
+
+```
 echo -e 'export CUDA_HOME="/opt/cuda"\nexport PATH="$PATH:$CUDA_HOME/bin"\nexport LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_HOME/lib64"\n' > ${HOME}/.config/environment.d/cuda.conf
 ```
 
-### git clone and build to install [llama.cpp](https://github.com/ggml-org/llama.cpp)
+### Clone and Build llama.cpp
 
-``` bash
+```
 cd ${HOME}
+
 git clone https://github.com/ggml-org/llama.cpp
+
 mkdir -p llama.cpp/build
 cd llama.cpp/build
-cmake -B `pwd` -DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS -DGGML_CUDA=ON -DGGML_CUDA_F8=ON -DGGML_CUDA_F16=ON -DCMAKE_BUILD_TYPE=Release ..
-cmake --build `pwd`
+
+cmake -B "$(pwd)" \
+    -DGGML_BLAS=ON \
+    -DGGML_BLAS_VENDOR=OpenBLAS \
+    -DGGML_CUDA=ON \
+    -DGGML_CUDA_F8=ON \
+    -DGGML_CUDA_F16=ON \
+    -DCMAKE_BUILD_TYPE=Release \
+    ..
+
+cmake --build "$(pwd)"
 ```
 
-### git pull and build to update [llama.ccp](https://github.com/ggml-org/llama.cpp) when needed
+### Update llama.cpp
 
-``` bash
+When you need to update the repository:
+
+```
 cd ${HOME}/llama.cpp
-git pull https://github.com/ggml-org/llama.cpp
+
+git pull
+
 cd build
-rm -r tools/ui
-cmake -B `pwd` -DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS -DGGML_CUDA=ON -DGGML_CUDA_F8=ON -DGGML_CUDA_F16=ON -DCMAKE_BUILD_TYPE=Release ..
-cmake --build `pwd`
-```
- 
-> [!NOTE]
-> If you receive `Please commit your changes or stash them before you merge.` run the following: `git checkout -- [FILE NAME OF CONFLICTING FILE]` and try git again.
+rm -rf tools/ui
 
-> [!NOTE]
-> If you receive `CMake Error at tools/...` run the following: `cd .. && rm -rf build $$ mkdir build && cd build` and try cmake again.
+cmake -B "$(pwd)" \
+    -DGGML_BLAS=ON \
+    -DGGML_BLAS_VENDOR=OpenBLAS \
+    -DGGML_CUDA=ON \
+    -DGGML_CUDA_F8=ON \
+    -DGGML_CUDA_F16=ON \
+    -DCMAKE_BUILD_TYPE=Release \
+    ..
 
-Below is a bare minimum [llama.cpp](https://llama.app/) execution to get llama-serve  running with Nvidia CUDA and have Intel CPU offloading to cover gaps and overflows. It supports a UI at [http://127.0.0.1:11434/](http://127.0.0.1:11434/) and an OpenAI API at http://127.0.0.1:11434/v1. It only allows one model to be loaded at a time and does not focus on concurency optimization. It utilizes GGUF models that are saved into `${HOME}/llama.cpp/gguf/`. I recomend [Unsloth AI](https://huggingface.co/unsloth) models for this install. Use a model smaller than your total VRAM size, e.g. 8GB Video Card, use a 6GB Model (8-12B perameter at Q4 or Q5 quantization typically). Mixture of Expert (MoE) models can be any size but make sure the active experts (e.g. A4B) layers can fit in your GPU VRAM. 
-
-``` bash
-${HOME]/llama.cpp/build/bin/llama-server -c 0 -np 1 --cache-type-k q8_0 --cache-type-v q8_0 --batch-size 128 --models-dir ${HOME}/llama.cpp/gguf/ --models-max 1 --mmap --mlock --fit on --chat-template-kwargs "{\"thinking\":true, \"preserve_thinking\":true}" --reasoning on --host 127.0.0.1 --port 11434 --ui --cache-prompt --check-tensors
+cmake --build "$(pwd)"
 ```
 
 > [!NOTE]
-> You will see models listed when this executes. This models names are the names you need for an opencode configuration.
+>
+> If you receive:
+> `Please commit your changes or stash them before you merge.`
+>
+> Run:
+>
+> ```
+> git checkout -- [FILE NAME OF CONFLICTING FILE]
+> ```
+>
+> and try Git again.
+>
+> Obviously, this discards changes to the specified file. Don't do it to something you actually wanted.
 
+> [!NOTE]
+>
+> If you receive a `CMake Error at tools/...`, try rebuilding the directory from scratch:
+>
+>
+> ```
+> cd ..
+> rm -rf build
+> mkdir build
+> cd build
+> ```
+>
+> Then run CMake again.
 
-## Create a [llama.cpp](https://llama.app/) service
+---
 
-Create a service for the [llama.cpp](https://llama.app/) install. This service is bare minimum like the command above. It is not production ready.
+## llama.cpp Server
 
-``` ${HOME}/.config/systemd/user/llama-server.service
+The following is a bare-minimum configuration for running `llama-server` with NVIDIA CUDA and Intel CPU offloading.
+
+It provides:
+
+- A web UI at `http://127.0.0.1:11434/`
+- An OpenAI-compatible API at `http://127.0.0.1:11434/v1`
+- One model loaded at a time
+- GGUF models from `${HOME}/llama.cpp/gguf/`
+
+This configuration is **not designed for production or concurrency optimization**.
+
+It is designed to get a local model running and talking to the rest of the tools in this setup.
+
+### Models
+
+I recommend [Unsloth](<https://huggingface.co/unsloth>) models for this setup.
+
+As a general rule, don't use your entire VRAM budget for the model. Leave yourself some breathing room.
+
+For example:
+
+> 8 GB GPU → approximately 6 GB model
+
+For typical Q4/Q5 quantizations, that can put you somewhere in the neighborhood of an 8–12B model, depending on the model architecture and context requirements.
+
+Mixture-of-Experts (MoE) models can have a much larger total parameter count. Pay attention to the **active expert count** and whether the required layers fit in available VRAM.
+
+> [!NOTE]
+>
+> [unsloth/Qwen3.6-35B-A3B-GGUF - Unsloth Dynamic Q8_K_XL](https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF/blob/main/Qwen3.6-35B-A3B-UD-Q8_K_XL.gguf) is 39GB model, but it runs extremly well on 8GB VRAM video cards leveraging this configuration. It places the active layers on the GPU and the remainaing layers on the System RAM. Beautifully offloading less demanding tasks to the CPU.
+
+### Start the Server
+
+```
+${HOME}/llama.cpp/build/bin/llama-server \
+    -c 0 \
+    -np 1 \
+    --cache-type-k q8_0 \
+    --cache-type-v q8_0 \
+    --batch-size 128 \
+    --models-dir ${HOME}/llama.cpp/gguf/ \
+    --models-max 1 \
+    --mmap \
+    --mlock \
+    --fit on \
+    --chat-template-kwargs "{\"thinking\":true, \"preserve_thinking\":true}" \
+    --reasoning on \
+    --host 127.0.0.1 \
+    --port 11434 \
+    --ui \
+    --cache-prompt \
+    --check-tensors
+```
+
+When this starts, you'll see the available models listed.
+
+Those model names are what you'll need when configuring `opencode`.
+
+---
+
+## llama.cpp Service
+
+Running the server manually works.
+
+Running it automatically is better.
+
+Create:
+
+```
+${HOME}/.config/systemd/user/llama-server.service
+```
+
+with:
+
+```
 [Unit]
-Description="llama.cpp server (localhost)"
+Description=llama.cpp server (localhost)
 After=network.target
 
-# Try to start for 2 minutes before calling it failed
+# Try to start for 2 minutes before considering the service failed.
 StartLimitIntervalSec=120
 
-# Try to start at most 5 times them stop the service
+# Try to start at most 5 times before giving up.
 StartLimitBurst=5
 
 [Service]
-# See all CUDA Tools
+# CUDA tools
 Environment=PATH=/opt/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-# The applciation
+# llama.cpp server
 ExecStart=%h/llama.cpp/build/bin/llama-server -c 0 -np 1 --cache-type-k q8_0 --cache-type-v q8_0 --batch-size 128 --models-dir %h/llama.cpp/gguf/ --models-max 1 --mmap --mlock --fit on --chat-template-kwargs "{\"thinking\":true, \"preserve_thinking\":true}" --reasoning on --host 127.0.0.1 --port 11434 --ui --cache-prompt --check-tensors
 
-# Allow models to stay in RAM wihtouy swaping
+# Allow models to stay locked in RAM without swapping.
 LimitMEMLOCK=infinity
 
-# Restart if service fails or crashes
+# Restart if the service fails or crashes.
 Restart=on-failure
 
-# Wait 15 seconds, it may be cleaning up
+# Give cleanup some time.
 RestartSec=15
 
-# Give it 5 minutes to load incase models lag on cold GPU
+# Give models up to 5 minutes to load.
 TimeoutStartSec=5min
 
-# Give it time to cleanly unload models and exit.
+# Give the server time to cleanly unload models and exit.
 TimeoutStopSec=1min
 
-# As target user on login (~/.config/systemd/user/llama-server.service)
 [Install]
 WantedBy=default.target
 ```
 
-After a system `reboot` you can use this service just like any other `systemctl` service, just include the `--user` argument as it lives in userland.
+After a system reboot, manage the service like any other `systemctl` service.
 
-``` bash
+The important part is `--user`, because this is a user-level service:
+
+```
 systemctl --user enable llama-server
 systemctl --user status llama-server
 systemctl --user start llama-server
@@ -242,47 +647,121 @@ systemctl --user restart llama-server
 systemctl --user stop llama-server
 ```
 
+No `sudo`.
 
-## Add llama.cpp UI to the application launcher
+The service belongs to you.
 
-[SUPER] + [SPACE] >> Install >> Web App
+It is your llama.
 
-- Name: `llama.cpp UI`
-- URL: `http://127.0.0.1:11434/`
-- Icon: `https://raw.githubusercontent.com/ggml-org/llama.cpp/refs/heads/master/media/llama1-icon.png`
+---
 
+## Add the llama.cpp UI to the Application Launcher
 
-## Install [aider](https://aider.chat/) in Omarchy
+Create a web app:
 
-[SUPER] + [SPACE] >> Install >> AUR (Arch User Repository)
+```
+[SUPER] + [SPACE]
+    ↓
+Install
+    ↓
+Web App
+```
 
-> Search for `aider-install`
+Use:
+
+| Setting | Value |
+| --- | --- |
+| **Name** | `llama.cpp UI` |
+| **URL** | `http://127.0.0.1:11434/` |
+| **Icon** | `https://raw.githubusercontent.com/ggml-org/llama.cpp/refs/heads/master/media/llama1-icon.png` |
+
+Now your local LLM has a proper application icon.
+
+It still won't pay rent.
+
+---
+
+## Aider
+
+Install [Aider](<https://aider.chat/>) through the Omarchy Package installer:
+
+```
+[SUPER] + [SPACE]
+    ↓
+Install
+    ↓
+Package
+```
+
+Search for:
+
+```
+aider-install
+```
 
 > [!NOTE]
-> This install should partually fail due to [mise](https://mise.jdx.dev/) so run:
-> `uvx aider-install`
+>
+> This installation should partially fail due to [mise](<https://mise.jdx.dev/>).
+>
+> When it does, run:
+>
+> ```
+> uvx aider-install
+> ```
 
-Run `aider --version` to ensure the install was successful.
+Verify the installation:
 
+```
+aider --version
+```
 
-## [opencode](https://opencode.ai/) setup
+If you get a version number, congratulations.
 
-[SUPER] + [SPACE] >> Setup >> Agent 
+Aider exists.
 
-> Search for `opencode`
-> OR from the terminal run: `omarchy default agent opencode`
+---
 
-Provided is a sample bare minimum default [opencode](https://github.com/anomalyco/opencode).json configuration file. This is by no means production ready. It is just enough to get you started with the [llama.cpp](https://github.com/anomalyco/opencode) install from above.
+# 🧠 opencode Setup
+
+Configure [opencode](<https://opencode.ai/>) as the default Omarchy agent:
+
+```
+[SUPER] + [SPACE]
+    ↓
+Setup
+    ↓
+Agent
+```
+
+Search for:
+
+```
+opencode
+```
+
+Or run:
+
+```
+omarchy default agent opencode
+```
+
+---
+
+## Connect opencode to llama.cpp
+
+The following is a minimal `opencode.json` configuration for using the local llama.cpp server.
 
 > [!NOTE]
-> Replace `MODEL-NAME-PRESENTED-BY-LLAMA-SERVE` with the proper name llama-server is presenting.
-> Replace `HUMAN READABLE NAME AND INFORMATION` with a name or description that has meaning to you.
-> e.g. `"Qwen3.6-35B-A3B-UD-Q8_K_XL": { "name": "Qwen 3.6 35B MoE [A 3B] Unslothed - General Reasoning & Tooling"},`
+>
+> OpenCode does not automatically detect the avaialble models in llama.cpp so you need to specify the models you plan on using with OpenCode. This will assume you have the [unsloth/Qwen3.6-35B-A3B-GGUF 8Q](https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF/blob/main/Qwen3.6-35B-A3B-UD-Q8_K_XL.gguf) model mentioned earlier.
 
-> The `model` line outside of the `provider` block defines the default model for [opencode](https://github.com/anomalyco/opencode) to select every time it opens.
-> The `default_agent` line set opencode in plan mode by default instead of build mode.
+Create:
 
-``` ${HOME}/.config/opencode/opencode.json
+```
+${HOME}/.config/opencode/opencode.json
+```
+
+```
 {
   "$schema": "https://opencode.ai/config.json",
   "provider": {
@@ -295,14 +774,11 @@ Provided is a sample bare minimum default [opencode](https://github.com/anomalyc
       "models": {
         "MODEL-NAME-PRESENTED-BY-LLAMA-SERVE": {
           "name": "HUMAN READABLE NAME AND INFORMATION"
-        },
-        "MODEL-NAME-PRESENTED-BY-LLAMA-SERVE": {
-          "name": "HUMAN READABLE NAME AND INFORMATION"
-        },
+        }
       }
     }
   },
-  "model": "llama.cpp-(local)/MODEL-NAME-PRESENTED-BY-LLAMA-SERVE",
+  "model": "llama.cpp-(local)/Qwen3.6-35B-A3B-UD-Q8_K_XL",
   "default_agent": "plan",
   "permission": {
     "bash": "ask",
@@ -319,53 +795,324 @@ Provided is a sample bare minimum default [opencode](https://github.com/anomalyc
     "question": "allow",
     "npm": "deny",
     "git": "ask"
-  },
+  }
 }
 ```
 
-Expose this [opencode](https://github.com/anomalyco/opencode).json configuration to the system so that it can use your local LLMs for built-in features like `crash-watch`.
+Replace:
 
-``` bash
+```
+MODEL-NAME-PRESENTED-BY-LLAMA-SERVE
+```
+
+with the model name presented by `llama-server`.
+
+Replace:
+
+```
+HUMAN READABLE NAME AND INFORMATION
+```
+
+with something meaningful.
+
+For example:
+
+```
+"Qwen3.6-35B-A3B-UD-Q8_K_XL": {
+  "name": "Qwen 3.6 35B MoE [A3B] - General Reasoning & Tooling"
+}
+```
+
+The `model` setting outside the `provider` block determines the default model selected whenever `opencode` starts.
+
+The `default_agent` setting starts `opencode` in `plan` mode instead of `build` mode.
+
+---
+
+## Expose the opencode Configuration
+
+Expose the configuration file through the environment so `opencode` can use the local LLM configuration for built-in features such as `crash-watch`:
+
+```
 echo -e "export OPENCODE_CONFIG=\"${HOME}/.config/opencode/opencode.json\"\n" > ${HOME}/.config/environment.d/opencode_config.conf
 ```
 
+---
 
-## Add the ability for the current logged in user to renice applications
+# ⚙️ Developer Tweaks
 
-> [!NOTE]
-> Only if needed!
+## Give the Current User the Ability to Renice Applications
 
-``` bash
+ > \[!NOTE\]\
+>  **Only do this if you actually need it.**
+
+Allow the current logged-in user to assign a nice value of `-10`:
+
+```
 sudo mkdir -p /etc/security/limits.d/
-echo -e "$USER\tsoft\tnice\t-10\n" | sudo tee /etc/security/limits.d/99-renice.conf
+
+echo -e "$USER\tsoft\tnice\t-10\n" | \
+    sudo tee /etc/security/limits.d/99-renice.conf
 ```
 
+This is a system-level configuration change.
 
-## Game Developers needing to poke at game memory
-Some of us like to work on game engines. You need to poke around memory. The `scanmem` tool is part of Arch Extras Repository (no relation to AUR). You won't see it in the standard Install Packages TUI. Run this command to install it from Extras: `sudo pacman -S gameconqueror scanmem`
+Use responsibly.
 
+Your CPU has feelings too.
 
-## What is `n`
+---
 
-The command `n` is a built in function of the shell. Use `type n` to see the function. Omarchy base includes [neovim](https://neovim.io/) as it's editor and applied the [lazyvim](https://www.lazyvim.org/) customization templates to it. The base [neovim](https://neovim.io/) command is `nvim`.
+## Game Developers: Poke at Game Memory
 
+Some of us like working on game engines.
 
-## Fuzzy Finder for NeoViM
+Sometimes that means poking around in memory.
 
-Create the alias `alias ff-neo='n $(ff -i -e)'` to make finding an opening files easier. It opens fuzzy finder in exact words match, case insensitive mode. Type a file (.e.g btop.conf). Select the correct file from the list (Up and Down Arrows and Enter). It will automatically open that file in NeoVIM (nvim). See above ***What is \`n\`***
+The `scanmem` tool is available from the Arch package repositories. Do not install from **the AUR**.
 
+Install it with:
 
-## List all currently open window identifiers
+```
+sudo pacman -S gameconqueror scanmem
+```
 
-When using Hyprland there are times where you will need to configure things for specific Window Identifiers. To list the identifiers for all open windows run `hyprctl clients | grep -E "Window |class:|title:|tags:|pid:|hidden:|visible:"`.
+Because sometimes debugging means asking a running process:
 
+> "What exactly are you doing with that number?"
 
-## Increase btop TUI window size (uses window identifies above)
-It is just too small, especially if you increase the font size or use ghostty instead of foot. Open the user specific hyprland config: `n ${HOME}/.config/hypr/hyprland.lua`. In this file look for the section `-- Add any other personal Hyprland configuration below.` and add a line below that, on that line add the following `o.window("org.omarchy.btop", { name = "btop-size", tag = "-floating-window", float = true, center = true, size = { 1240, 950 } })`. Write the file: [ESC] [:] write [Enter]. QuitL [:] quit [Enter]. Hyprland uses lua scripts for the configuration, it should reload automatically... just to be sure run `hyprctl reload`. Press [SUPER] + [CTRL] + [E], look at that nice big btop. This will fit comfortably on any 1080p sized screen or larger. This works by removing the default `floating-window` tag that is assigned in the anonymous / default space. It then creates a floating centered window at the specified size. I names this setting so that it has override priority versus anonymous tags. If you want to use this for other apps change both the window identity and the rule name fields.
+---
 
+# 📝 Neovim
 
-## Send an App to a specific workspace every time it is opened  (uses window identifies above)
+Omarchy uses [Neovim](<https://neovim.io/>) as its editor and applies [LazyVim](<https://www.lazyvim.org/>) customization templates.
+
+The actual Neovim executable is:
+
+```
+nvim
+```
+
+But there's another command worth knowing.
+
+## What Is `n`?
+
+The command `n` is a built-in shell function.
+
+To see what it actually is:
+
+```
+type n
+```
+
+Omarchy uses `nvim` as the underlying editor, while `n` provides a convenient function around it.
+
+Several examples in this README use `n` for opening configuration files.
+
+---
+
+## Fuzzy Finder for Neovim
+
+Create this alias:
+
+```
+alias ff-neo='n $(ff -i -e)'
+```
+
+This makes finding and opening files much easier.
+
+The fuzzy finder runs in:
+
+- Exact-match mode
+- Case-insensitive mode
+
+For example, type:
+
+```
+ff-neo btop.conf
+```
+
+Select the correct file using:
+
+```
+↑ ↓
+ENTER
+```
+
+The selected file will automatically open in Neovim.
+
+One less path to type.
+
+One less opportunity to mistype a directory name.
+
+---
+
+# 🪟 Hyprland
+
+## List All Currently Open Window Identifiers
+
+When working with Hyprland, there are times when you need to configure something for a specific window.
+
+Get the relevant identifiers for all currently open windows with:
+
+```
+hyprctl clients | grep -E "Window |class:|title:|tags:|pid:|hidden:|visible:"
+```
+
+This is particularly useful when creating window rules.
+
+---
+
+## Increase the `btop` TUI Window Size
+
+The default `btop` window is just too small.
+
+Especially if you've increased the font size.
+
+Especially if you're using Ghostty.
+
+Open the user-specific Hyprland configuration:
+
+```
+n ${HOME}/.config/hypr/hyprland.lua
+```
+
+Find:
+
+```
+-- Add any other personal Hyprland configuration below.
+```
+
+Add the following underneath it:
+
+```
+o.window("org.omarchy.btop", {
+    name = "btop-size",
+    tag = "-floating-window",
+    float = true,
+    center = true,
+    size = { 1240, 950 }
+})
+```
+
+Save the file:
+
+```
+[ESC]
+[:]
+write
+[ENTER]
+```
+
+Then quit:
+
+```
+[:]
+quit
+[ENTER]
+```
+
+Hyprland should reload automatically.
+
+To make absolutely sure Hyprland reloads:
+
+```
+hyprctl reload
+```
+
+Launch `btop`:
+
+```
+[SUPER] + [CTRL] + [E]
+```
+
+Look at that.
+
+Much better.
+
+### What's Happening Here?
+
+The rule removes the default `floating-window` tag assigned in the anonymous/default space.
+
+ It then creates a floating, centered window at:
+
+```
+1240 × 950
+```
+
+The rule is named `btop-size` so it has override priority over anonymous tags.
+
+This size works comfortably on a 1080p display or larger.
+
+Want to use the same technique for another application?
+
+Change:
+
+```
+org.omarchy.btop
+```
+
+to the appropriate window identity and change:
+
+```
+btop-size
+```
+
+to an appropriate rule name.
+
+---
+
+## Send an App to a Specific Workspace Every Time
+
 > [!NOTE]
-> I have not found a way to make this work for terminal applications.
+> I have not found a way to make this work reliably for terminal applications.
 
-Open the user specific hyprland config: `n ${HOME}/.config/hypr/hyprland.lua`. In this file look for the section `-- Add any other personal Hyprland configuration below.` and add a line below that, on that line add the following `o.window("firefox", { workspace = "2" })`. Firefox now always opens workspace 2.
+Open:
+
+```
+n ${HOME}/.config/hypr/hyprland.lua
+```
+
+Find:
+
+```
+-- Add any other personal Hyprland configuration below.
+```
+
+Add:
+
+```
+o.window("firefox", {
+    workspace = "2"
+})
+```
+
+Firefox will now always open on workspace 2.
+
+Because apparently telling applications where to live is easier than remembering where you put them.
+
+---
+
+# 🏁 Final Thoughts
+
+This repository is intentionally a collection of **tested notes, configurations, and personal preferences** rather than a universal Omarchy configuration.
+
+ The hardware profile is intentional.
+
+ The opinions are intentional.
+
+ The weird little tweaks are intentional.
+
+ If you find something useful here, steal it shamelessly.
+
+ If something doesn't work on your machine, figure out why and fix it.
+
+ And if you discover something better:
+
+ **I'd love to hear about it.**
+
+ The entire point of documenting this stuff is so that Future Me doesn't have to rediscover it at 2 AM after an innocent:
+
+```
+sudo pacman -S something
+```
