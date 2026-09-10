@@ -166,6 +166,59 @@ I am no exception.
 
 ---
 
+# 🔎 Tiny Bar - I mean top bar
+
+I am all for getting things out of the way, [David Heinemeier Hansson (DHH)](https://www.google.com/goto?url=CAESRwHrOzAVD7BZgeEsF9u0ImGYSza2zmb5cQmiletyPLC9diG9cpXda24DFTAuiuc2tGWdixk5mnhdYBEtyoKlMPHZ-ks1Tt76) must have 20/10 x-ray vision. 
+
+I don't, I need to see the clock from time to time. 😄
+
+Edit the following template file:
+
+```
+sudo nvim /usr/share/omarchy/default/themed/shell.toml.tpl
+```
+
+Change these specific values (do not copy and paste this text):
+
+```
+...
+[bar]
+...
+...
+scale-with-font  = true    <- Make sure it is true
+# size-horizontal  = 26    <- Comment out
+# size-vertical    = 28    <- Comment out
+...
+...
+...
+[font]
+...
+base-size = 18             <- Make sure this is a font size comfortable for you
+```
+
+Save the file:
+
+```
+[ESC]
+[:]
+write
+[ENTER]
+```
+
+Then quit:
+
+```
+[:]
+quit
+[ENTER]
+```
+
+Editing this file will make this apply globally to all themes... 
+
+Unless the theme artist had a different opinion and set it manually.
+
+---
+
 # 🚀 Shell - Brought to You by Starship
 
 [Starship](<https://starship.rs/>) controls the shell prompt.
@@ -503,7 +556,7 @@ cmake --build "$(pwd)"
 > ```
 >
 > and try Git again.
->
+>😄
 > Obviously, this discards changes to the specified file. Don't do it to something you actually wanted.
 
 > [!NOTE]
