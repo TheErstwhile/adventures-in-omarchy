@@ -1170,10 +1170,21 @@ For all the built in trans-coding wonders that Omarchy has, it misses the mark o
 ffmpeg is installed by default, use this to convert screen captures.
 
 ```
-ffmpeg -i input.mp4 -c:v libvpx-vp9 -crf 26 -b:v 0 -row-mt 1 -c:a libopus output.webm
+ffmpeg -i ${HOME}/Videos/INPUT.mp4 -c:v libvpx-vp9 -crf 26 -b:v 0 -row-mt 1 -c:a libopus ${HOME}/Videos/OUTPUT.webm
 ```
 
-Changing crf to `32` will force a stronger quantization compression and the file will be smaller. This is OK for desktop recordings, but video game or flashy effects recording will blur and pixelate if there are too many pixel colors at once. 
+Changing crf to `-crf 32` will force a stronger quantization compression and the file will be smaller. This is OK for desktop recordings, but video game or flashy effects recording will blur and pixelate if there are too many pixel colors at once. 
+
+```
+ffmpeg -i ${HOME}/Videos/INPUT.mp4 -c:v libvpx-vp9 -crf 32 -b:v 0 -row-mt 1 -c:a libopus ${HOME}/Videos/OUTPUT.webm
+```
+
+Adding `-vf scale=-2:720` will scale the video down to 720p, droping file size but retain the lower compression at `-crf 26`
+
+```
+ffmpeg -i ${HOME}/Videos/INPUT.mp4 -c:v libvpx-vp9 -crf 32 -b:v 0 -vf scale=-2:720 -row-mt 1 -c:a libopus ${HOME}/Videos/OUTPUT.webm
+```
+
 
 ---
 
