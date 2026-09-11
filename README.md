@@ -1039,6 +1039,7 @@ Find:
 Add the following underneath it:
 
 ```
+-- Make the btop windows larger. Make this a named rule as they override default anonymous rules.
 o.window("org.omarchy.btop", {
     name = "btop-size",
     tag = "-floating-window",
@@ -1115,6 +1116,23 @@ to an appropriate rule name.
 
 ---
 
+## Center Float all Steam Games at 1080
+
+Here is a handy one to demonstrate. Float Center all Steam Games / Apps at 1920x1080
+
+```
+-- Float Center all Steam Games / Apps at 1920x1080
+o.window("steam_app_.*", {
+    name = "steam-size",
+    tag = "-floating-window",
+    float = true,
+    center = true,
+    size = { 1920, 1080 }
+})
+```
+
+---
+
 ## Send an App to a Specific Workspace Every Time
 
 > [!NOTE]
@@ -1143,6 +1161,19 @@ o.window("firefox", {
 Firefox will now always open on workspace 2.
 
 Because apparently telling applications where to live is easier than remembering where you put them.
+---
+
+# Convert MP4 to WEBM
+
+For all the built in trans-coding wonders that Omarchy has, it misses the mark on this one. 
+
+ffmpeg is installed by default, use this to convert screen captures.
+
+```
+ffmpeg -i input.mp4 -c:v libvpx-vp9 -crf 26 -b:v 0 -row-mt 1 -c:a libopus output.webm
+```
+
+Changing crf to `32` will force a stronger quantization compression and the file will be smaller. This is OK for desktop recordings, but video game or flashy effects recording will blur and pixelate if there are too many pixel colors at once. 
 
 ---
 
