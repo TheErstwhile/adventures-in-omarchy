@@ -1016,6 +1016,15 @@ This is particularly useful when creating window rules.
 
 ---
 
+## Give the window manager some life and space
+Simple animations to give window interactions a more natural feel.
+
+I also can't stand the workspace padding on windows in `scrolling` mode versus `dwindle` mode. Not sure what I mean, open a bunch of windows and press [SUPER] + [L] a couple times. 
+
+See the comments in the file:
+
+---
+
 ## Increase the `btop` TUI Window Size
 
 The default `btop` window is just too small.
@@ -1118,7 +1127,7 @@ to an appropriate rule name.
 
 ## Center Float all Steam Games at 1080
 
-Here is a handy one to demonstrate. Float Center all Steam Games / Apps at 1920x1080
+Here is a handy one to demonstrate. Float + Center all Steam Games / Apps at 1920x1080
 
 ```
 -- Float Center all Steam Games / Apps at 1920x1080
