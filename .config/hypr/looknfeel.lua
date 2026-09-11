@@ -31,9 +31,9 @@ hl.curve( "overshoot_transition", { type = "bezier", points = { {-1.00, -0.5}, {
 hl.curve( "hesitate", { type = "bezier", points = { {0, 0.5}, {1, 0.5} } } )
 -- a bezier curve that will move a window bakwards sligtly then shoot it forward
 hl.curve( "windup", { type = "bezier", points = { {0.5, 0}, {0.5, -1} } } )
--- a bezier curve with a gentile start, fast middle, and gentile end
+-- a bezier curve with a slow start, fast middle, and slow end
 hl.curve( "easeinout", { type = "bezier", points = { {0.5, 0}, {0.5, 1} } } )
--- a spring curve that is supposed to bounce, but i don't see it
+-- a spring curve that is supposed to bounce, but I don't see it
 hl.curve( "bounce", { type = "spring", mass = 1, stiffness = 70, dampening = 10 } )
 
 -- enable animation
