@@ -1182,7 +1182,7 @@ ffmpeg -i ${HOME}/Videos/INPUT.mp4 -c:v libvpx-vp9 -crf 32 -b:v 0 -row-mt 1 -c:a
 Adding `-vf scale=-2:720` will scale the video down to 720p, droping file size but retain the lower compression at `-crf 26`
 
 ```
-ffmpeg -i ${HOME}/Videos/INPUT.mp4 -c:v libvpx-vp9 -crf 32 -b:v 0 -vf scale=-2:720 -row-mt 1 -c:a libopus ${HOME}/Videos/OUTPUT.webm
+ffmpeg -i ${HOME}/Videos/INPUT.mp4 -c:v libvpx-vp9 -crf 26 -b:v 0 -vf scale=-2:720 -row-mt 1 -c:a libopus ${HOME}/Videos/OUTPUT.webm
 ```
 
 
