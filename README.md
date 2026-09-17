@@ -1200,6 +1200,24 @@ ffmpeg -i ${HOME}/Videos/INPUT.mp4 -c:v libvpx-vp9 -crf 26 -b:v 0 -vf scale=-2:7
 
 ---
 
+# Remove Hermes (so we can put it in a Docker Container)
+
+``` bash
+hermes uninstall
+# Wait for it to finish
+# Answer Yes
+rm -rf ${HOME}/.local/bin/hermes
+rm -rf ${HOME}/.local/share/mise/installs/pipx-hermes-agent
+```
+
+Under Construction
+
+# Docker Containers
+
+## Hermes (Under Construction) 
+
+## Bambu Labs Studio (Under Construction) 
+
 # 🏁 Final Thoughts
 
 This repository is intentionally a collection of **tested notes, configurations, and personal preferences** rather than a universal Omarchy configuration.
