@@ -29,12 +29,11 @@ success_symbol = "[✓](bold green)"
 #command = "printf ' '"
 # when = "test -f compose.yaml || test -f docker-compose.yml || test -f Dockerfile"
 # format = "[$output]($style)  "
-detect_files = ["compose.yaml", "docker-compose.yml", "Dockerfile", "Containerfile"]
+detect_files = ["compose.yml", "compose.yaml", "docker-compose.yml", "Dockerfile", "Containerfile"]
 detect_folders = [".devcontainer"]
 # detect_extensions = ["yaml"]
 format = "[]($style)  "
 style = "blue"
-
 
 # ─────────────────────────────────────────────────────────────
 # Current Working Directory
@@ -154,14 +153,14 @@ version_format = "${major}.${minor}"
 [cmd_duration]
 # Minimum Time in Milliseconds
 # 1_000 = 1 second
-min_time = 1_000
+# min_time = 1_000
 format = "[◷ $duration]($style) "
 style = "dimmed"
 
 
 # ─────────────────────────────────────────────────────────────
 # Shell jobs
-# Jobs is not a process monitor. 
+# Jobs is not a process monitor.
 # It is a shell-state reminder evaluated at prompt time.
 # The count may remain unchanged until the next prompt.
 # ─────────────────────────────────────────────────────────────
@@ -175,40 +174,39 @@ style = "dimmed"
 # ─────────────────────────────────────────────────────────────
 [battery]
 format = "[$symbol$percentage]($style)"
-
-full_symbol = " "
-charging_symbol = "⚡ "
-discharging_symbol = " "
-unknown_symbol = " "
-
+full_symbol = "  "
+charging_symbol = " ⚡ "
+discharging_symbol = "  "
+unknown_symbol = "[ 󱔢 ](yellow dimmed)"
+# style = "dimmed"
 
 # 0–25%: critical only when discharging
 [[battery.display]]
 threshold = 25
-charging_symbol = "⚡ "
-discharging_symbol = "[⚠  ](bold inverted red)"
+charging_symbol = "[ ⚡ ](bold red)"
+discharging_symbol = "[⚠   ](bold inverted red)"
 style = "bold"
 
 
 # 26–50%: information, but subdued
 [[battery.display]]
 threshold = 50
-charging_symbol = "⚡ "
-discharging_symbol = " "
-style = "dimmed"
+charging_symbol = "[ ⚡ ](orange)"
+discharging_symbol = "[  ](orange)"
+style = "orange"
 
 
 # 51–75%: information, but subdued
 [[battery.display]]
 threshold = 75
-charging_symbol = "⚡ "
-discharging_symbol = " "
-style = "dimmed"
+charging_symbol = " ⚡ "
+discharging_symbol = "  "
+style = "dimmed green"
 
 
 # 76–100%: healthy, unobtrusive
 [[battery.display]]
 threshold = 100
-charging_symbol = "⚡ "
-discharging_symbol = " "
-style = "dimmed"
+charging_symbol = " ⚡ "
+discharging_symbol = "  "
+style = "dimmed green"
