@@ -53,6 +53,38 @@ The goal is simple: save power when running on battery and stop pretending the C
 
 ---
 
+## Keybinding nonsense
+
+Binding `CTRL + ALT + DELETE` to a kill all open windows feature is nice. Until you accidentally obliterate all your work because you thought the KVM was on the Windows system.
+
+My starter keybinding config:
+> [${HOME}/.config/hypr/bindings.lua](https://github.com/TheErstwhile/adventures-in-omarchy/blob/main/.config/hypr/bindings.lua)
+
+Or run this little snip right here to add it to your keybindings:
+``` bash
+cat << EOF >> .config/hypr/bindings.lua
+
+-- No need for Google Maps
+hl.unbind("SUPER + SHIFT + S")
+o.bind("SUPER + SHIFT + S", "Screen Capture", "omarchy-capture-screenshot")
+
+-- Screensaver Hot Key
+hl.unbind("SUPER + N")
+o.bind("SUPER + N", "Screensaver", "omarchy-launch-screensaver force")
+
+-- Disable CTRL + ALT + DEL (close all windows)
+hl.unbind("CTRL + ALT + DELETE")
+-- Rebind CTRL + ALT + DEL to Loackscreen
+-- o.bind("CTRL + ALT + DELETE", "Lock System and Screensaver", "omarchy-system-lock && omarchy-launch-screensaver force")
+o.bind("CTRL + ALT + DELETE", "Lock system", "omarchy-system-lock")
+EOF
+hyprctl reload
+```
+
+> This leaves anything you already have in the config so your changes are not lost. This sits at the bottom and unbinds any repeats that came before it. That way your original lines are not lost.
+
+---
+
 # 🏹 Arch and the Dreaded AUR
 
 Ah yes, the **Arch User Repository**.
@@ -887,7 +919,7 @@ The `default_agent` setting starts `opencode` in `plan` mode instead of `build` 
 Expose the configuration file through the environment so `opencode` can use the local LLM configuration for built-in features such as `crash-watch`:
 
 ```
-echo -e "export OPENCODE_CONFIG=\"${HOME}/.config/opencode/opencode.json\"\n" > ${HOME}/.config/environment.d/opencode_config.conf
+echo -e "export OPENCODE_CONFIG=\"${HOME}/.config/opencode/opencode.json\"\n" >> ${HOME}/.config/environment.d/opencode_config.conf
 ```
 
 ---
