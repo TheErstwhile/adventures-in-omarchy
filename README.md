@@ -210,7 +210,9 @@ I am no exception.
 
 # 🔎 Tiny Bar - I mean top bar
 
-I am all for getting things out of the way, [David Heinemeier Hansson (DHH)](https://www.google.com/goto?url=CAESRwHrOzAVD7BZgeEsF9u0ImGYSza2zmb5cQmiletyPLC9diG9cpXda24DFTAuiuc2tGWdixk5mnhdYBEtyoKlMPHZ-ks1Tt76) must have 20/10 x-ray vision. 
+I am all for getting things out of the way when not needed...
+
+[David Heinemeier Hansson (DHH)](https://www.google.com/goto?url=CAESRwHrOzAVD7BZgeEsF9u0ImGYSza2zmb5cQmiletyPLC9diG9cpXda24DFTAuiuc2tGWdixk5mnhdYBEtyoKlMPHZ-ks1Tt76) must have 20/10 x-ray vision. 
 
 I don't, I need to see the clock from time to time. 😄
 
@@ -402,6 +404,10 @@ Download a `.flatpakref` file from [Flathub](<https://flathub.org/>) and install
 ```
 flatpak install ~/Downloads/com.provider.www.flatpakref
 ```
+
+### Update Flatpak Installs
+
+`flatpak update`
 
 ---
 
