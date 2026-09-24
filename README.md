@@ -66,19 +66,24 @@ Or run this little snip right here to add it to your keybindings:
 ``` bash
 cat << EOF >> ${HOME}.config/hypr/bindings.lua
 
--- No need for Google Maps
+-- No need for Google Maps to be bound to "SUPER + SHIFT + S"
+-- Make it screen capture like all other operating systems.
 hl.unbind("SUPER + SHIFT + S")
 o.bind("SUPER + SHIFT + S", "Screen Capture", "omarchy-capture-screenshot")
 
--- Screensaver Hot Key
+-- Add a screensaver hot key
+-- THIS DOES NOT AUTOMATICALLY LOCK, lock is still idle time delayed.
 hl.unbind("SUPER + N")
 o.bind("SUPER + N", "Screensaver", "omarchy-launch-screensaver force")
 
 -- Disable CTRL + ALT + DEL (close all windows)
 hl.unbind("CTRL + ALT + DELETE")
--- Rebind CTRL + ALT + DEL to Loackscreen
+-- Remove the comment character / comment indicator: '--' below to give CTRL + ALT + DELETE a function similar to Windows.
+-- o.bind("CTRL + ALT + DELETE", "Lock system", "omarchy-system-lock")
+-- o.bind("CTRL + ALT + DELETE", "Screensaver (time delay lock)", "omarchy-launch-screensaver force")
+-- Can not get below to work because Omarchy restricts running processes when lock is active.
 -- o.bind("CTRL + ALT + DELETE", "Lock System and Screensaver", "omarchy-system-lock && omarchy-launch-screensaver force")
-o.bind("CTRL + ALT + DELETE", "Lock system", "omarchy-system-lock")
+
 EOF
 hyprctl reload
 ```
