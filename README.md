@@ -805,6 +805,18 @@ It still won't pay rent.
 
 ---
 
+## 🚧 UNDER CONSTRUCTION: llama.cpp Docker Container
+
+🚧
+
+```
+sudo pacman -S --needed nvidia-container-toolkit
+```
+
+🚧
+
+---
+
 ## Aider
 
 Install [Aider](<https://aider.chat/>) through the Omarchy Package installer:
