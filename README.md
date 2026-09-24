@@ -64,7 +64,7 @@ My starter keybinding config:
 
 Or run this little snip right here to add it to your keybindings:
 ``` bash
-cat << EOF >> .config/hypr/bindings.lua
+cat << EOF >> ${HOME}.config/hypr/bindings.lua
 
 -- No need for Google Maps
 hl.unbind("SUPER + SHIFT + S")
