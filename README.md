@@ -92,7 +92,7 @@ hyprctl reload
 
 ---
 
-## ls is poeple ... I mean ls is eza
+## ls is ... eza
 
 Unless you run `ls -a` chances are you will hardly ever see group information in file listings. Use one of these to add `--group` listings to every ls command.
 
