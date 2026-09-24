@@ -89,10 +89,28 @@ hyprctl reload
 
 ## ls is poeple ... I mean ls is eza
 
-Unless you run `ls -a` chances are you will hardly ever see group information in file listings. Use this to add `--group` listings to every ls command.
+Unless you run `ls -a` chances are you will hardly ever see group information in file listings. Use one of these to add `--group` listings to every ls command.
 
 ```
+# Change the global alias (could be over written by future updates)
 sudo sed -i "s/alias ls='eza -lh --group-directories-first --icons=auto'/alias ls='eza --long --header --group --group-directories-first --icons=auto'/" /usr/share/omarchy/default/bash/aliases
+${HOME}/usr/share/omarchy/default/bash/aliases
+```
+
+```
+# Create a user alias to override system defaults (should be update resistant) 
+cat << EOF >> ${HOME}/.bashrc
+
+# File system
+if command -v eza &> /dev/null; then
+  alias ls='eza --long --header --group --group-directories-first --icons=auto'
+  alias lsa='ls -a'
+  alias lt='eza --tree --level=2 --group --long --icons --git'
+  alias lta='lt -a'
+fi
+
+EOF
+source ${HOME}/.bashrc
 ```
 
 # 🏹 Arch and the Dreaded AUR
