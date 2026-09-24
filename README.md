@@ -1,8 +1,10 @@
 # 🏔️ Adventures in Omarchy
 
-My journey of transforming a vanilla [Omarchy](<https://omarchy.org/>) installation into a high-performance development powerhouse.
+My journey of transforming a vanilla [Omarchy](<https://omarchy.org/>) installation into a high-performance development powerhouse...
 
 Or, at the very least, a survival guide for the setup process.
+
+As always Omarchy is opinionated. If your opinion of what it should be differs from mine, change it how you see fit.
 
 Everything in this document has been **installed, configured, and tested on my system for multiple weeks**. These are not theoretical configurations or instructions assembled from random corners of the internet. This is what I actually use.
 
@@ -84,6 +86,14 @@ hyprctl reload
 > This leaves anything you already have in the config so your changes are not lost. This sits at the bottom and unbinds any repeats that came before it. That way your original lines are not lost.
 
 ---
+
+## ls is poeple ... I mean ls is eza
+
+Unless you run `ls -a` chances are you will hardly ever see group information in file listings. Use this to add `--group` listings to every ls command.
+
+```
+sudo sed -i "s/alias ls='eza -lh --group-directories-first --icons=auto'/alias ls='eza --long --header --group --group-directories-first --icons=auto'/" /usr/share/omarchy/default/bash/aliases
+```
 
 # 🏹 Arch and the Dreaded AUR
 
