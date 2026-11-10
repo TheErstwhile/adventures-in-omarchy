@@ -83,6 +83,10 @@ hl.unbind("CTRL + ALT + DELETE")
 -- o.bind("CTRL + ALT + DELETE", "Screensaver (time delay lock)", "omarchy-launch-screensaver force")
 -- Can not get below to work because Omarchy restricts running processes when lock is active.
 -- o.bind("CTRL + ALT + DELETE", "Lock System and Screensaver", "omarchy-system-lock && omarchy-launch-screensaver force")
+-- SUPER + L should not be change the desktop layout change it to SUPER + CTRL + L
+hl.unbind("SUPER + L")
+o.bind("SUPER + L", "Lock System", "omarchy-system-lock")
+o.bind("SUPER + CTRL + L", "Cycle workspace layout", "omarchy-hyprland-workspace-layout-toggle")
 
 EOF
 hyprctl reload
