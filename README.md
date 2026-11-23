@@ -85,6 +85,8 @@ hl.unbind("CTRL + ALT + DELETE")
 -- o.bind("CTRL + ALT + DELETE", "Lock System and Screensaver", "omarchy-system-lock && omarchy-launch-screensaver force")
 -- SUPER + L should not be change the desktop layout change it to SUPER + CTRL + L
 hl.unbind("SUPER + L")
+hl.unbind("SUPER + CTRL + L")
+hl.unbind("SUPER + L")
 o.bind("SUPER + L", "Lock System", "omarchy-system-lock")
 o.bind("SUPER + CTRL + L", "Cycle workspace layout", "omarchy-hyprland-workspace-layout-toggle")
 
