@@ -237,6 +237,11 @@ I am no exception.
 
 ---
 
+`omarchy display text size 16`
+
+---
+
+
 # 🔎 Tiny Bar - I mean top bar
 
 I am all for getting things out of the way when not needed...
@@ -289,6 +294,28 @@ quit
 Editing this file will make this apply globally to all themes... 
 
 Unless the theme artist had a different opinion and set it manually.
+
+---
+
+```
+# Create a user ~/.config/omarchy/shell.toml for default top bar settings
+cat << EOF >> ${HOME}/.config/omarchy/shell.toml
+[font]
+base-size = 18
+
+[bar]
+size-horizontal = 36
+
+[bar.font]
+base-size = 18
+EOF
+```
+
+---
+
+`omarchy-restart-shell`
+
+`hyprctl reload`
 
 ---
 
